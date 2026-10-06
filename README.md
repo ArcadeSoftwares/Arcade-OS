@@ -80,7 +80,6 @@ Then reboot and choose the USB device from your firmware/BIOS boot menu.
 ```text
 Arcade-OS/
 ├── changelog.md
-├── Diary.md
 ├── LICENSE
 ├── README.md
 ├── local-repo/
