@@ -11,6 +11,8 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 CYAN='\033[1;36m'
+WHITE='\033[1;37m'
+GRAY='\033[0;37m'
 DIM='\033[2m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
@@ -35,6 +37,35 @@ EOF
     echo -e "${DIM}      https://github.com/ArcadeSoftwares/Arcade-OS${NC}\n"
 }
 
+show_info() {
+    local pkg_count=0
+    if [[ -f "${PROFILE_DIR}/packages.x86_64" ]]; then
+        pkg_count=$(grep -vE '^[[:space:]]*(#|$)' "${PROFILE_DIR}/packages.x86_64" | wc -l)
+    fi
+    local version="$(date +%Y.%m.%d)"
+    local core_status="Available"
+    if [[ ! -d "$CORE_REPO_DIR" ]]; then
+        core_status="Not Found"
+    fi
+
+    echo ""
+    echo -e "    ${CYAN}▄▀▀▄${NC}        ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
+    echo -e "   \033[38;5;45m▀▀▀▀▀▀${NC}       ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
+    echo -e "  \033[38;5;39m▀▀▀▀▀▀▀▀${NC}      ${WHITE}Arch Linux x86_64 • KDE Plasma${NC}"
+    echo -e " \033[38;5;33m▄▀▀    ▀▀▄${NC}     ${WHITE}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
+    echo -e "\033[38;5;27m▄▀▀      ▀▀▄${NC}    ${DIM}${SCRIPT_DIR}${NC}"
+    echo ""
+    echo -e "  ${BOLD}Profile Configuration:${NC}"
+    echo -e "    ${DIM}• Architecture:   ${NC}x86_64"
+    echo -e "    ${DIM}• Boot Modes:     ${NC}bios.syslinux, uefi.systemd-boot"
+    echo -e "    ${DIM}• Desktop:        ${NC}KDE Plasma 6 (macOS aesthetic, breeze/arcade)"
+    echo -e "    ${DIM}• Installer:      ${NC}Calamares GUI with Arcade QML branding"
+    echo -e "    ${DIM}• Packages:       ${NC}${pkg_count} base + desktop + utilities"
+    echo -e "    ${DIM}• Core Upstream:  ${NC}${core_status} (${CORE_REPO_DIR})"
+    echo -e "    ${DIM}• Local Repo:     ${NC}${LOCAL_REPO_DIR}"
+    echo ""
+}
+
 info() {
     echo -e "${BLUE}[INFO]${NC} $1"
 }
@@ -55,6 +86,7 @@ usage() {
     echo -e "${BOLD}Usage:${NC} $0 [options]"
     echo ""
     echo "Options:"
+    echo "  --info       Display Arcade-OS branding, system information, and configuration"
     echo "  --clean      Clean previous build workspaces (work/ and out/)"
     echo "  --sync       Synchronize latest Calamares configs & assets from ArcadeLinux-Core"
     echo "  --help       Show this help message"
@@ -192,6 +224,14 @@ build_iso() {
 
 DO_CLEAN=false
 DO_SYNC=false
+
+# Handle --info directly without showing default build banner
+for arg in "$@"; do
+    if [[ "$arg" == "--info" ]]; then
+        show_info
+        exit 0
+    fi
+done
 
 show_banner
 
