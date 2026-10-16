@@ -158,5 +158,6 @@ partitionmanager
 # Network
 networkmanager
 
-xorg-xrandrplasma-workspace
+xorg-xrandr
+plasma-workspace
 kvantum
