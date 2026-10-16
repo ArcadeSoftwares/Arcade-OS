@@ -23,24 +23,34 @@ sudo pacman -S archiso git
 
 ---
 
-## Fork and Build
+## Build the ISO
+
+You can use the automated build script which automatically configures local repository paths and dependencies:
 
 ```bash
-# 1) Fork this repository, then clone your fork
-git clone https://github.com/ProjectArcade/Arcade-OS
+# 1) Clone the repository
+git clone https://github.com/ArcadeSoftwares/Arcade-OS
 cd Arcade-OS
 
-# 2) Build the ISO from the profile directory (requires root)
-sudo mkarchiso -v -w Profile/work -o Profile/out Profile
+# 2) Build ISO (will prompt for sudo when invoking mkarchiso)
+./build.sh
 
-# 3) Built ISO output
-ls -lh Profile/out/
+# 3) Clean rebuild
+./build.sh --clean
+
+# 4) Sync latest Calamares assets from ArcadeLinux-Core and rebuild
+./build.sh --sync --clean
 ```
 
-### Clean Rebuild
+### Manual Build
+
+If you prefer building manually without `build.sh`:
 
 ```bash
-sudo rm -rf /Profile/work /Profile/out
+# Clean previous build directories
+sudo rm -rf work/ out/ Profile/work Profile/out
+
+# Build
 sudo mkarchiso -v -w work/ -o out/ Profile/
 ```
 

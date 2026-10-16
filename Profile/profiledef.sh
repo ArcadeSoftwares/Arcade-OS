@@ -24,6 +24,7 @@ file_permissions=(
   ["/usr/local/bin/choose-mirror"]="0:0:755"
   ["/usr/local/bin/Installation_guide"]="0:0:755"
   ["/usr/local/bin/livecd-sound"]="0:0:755"
+  ["/usr/local/bin/calamares-launch"]="0:0:755"
   ["/home/arcade"]="0:1000:750"
   ["/home/arcade/.config"]="0:1000:750"
   ["/home/arcade/.config/kdeglobals"]="0:1000:640"
