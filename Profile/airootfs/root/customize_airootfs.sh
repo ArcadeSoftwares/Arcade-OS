@@ -5,11 +5,18 @@ set -e
 plymouth-set-default-theme -R arcade
 
 # Setup default splash
-SPLASH_SRC="/usr/share/plasma/look-and-feel/arcade-splash"
-if [[ ! -d "$SPLASH_SRC" && -d "/home/arcade/.local/share/plasma/look-and-feel/arcade-splash" ]]; then
-	mkdir -p "$(dirname "$SPLASH_SRC")"
-	cp -a "/home/arcade/.local/share/plasma/look-and-feel/arcade-splash" "$SPLASH_SRC"
-fi
+install -d -m 0755 /etc/xdg
+cat > /etc/xdg/ksplashrc << 'EOS'
+[KSplash]
+Engine=KSplashQML
+Theme=com.github.ProjectArcade.Arcade
+EOS
 
-# Ensure user permissions
+install -d -m 0755 /home/arcade/.config
+cat > /home/arcade/.config/ksplashrc << 'EOS'
+[KSplash]
+Engine=KSplashQML
+Theme=com.github.ProjectArcade.Arcade
+EOS
+
 chown -R arcade:arcade /home/arcade 2>/dev/null || true

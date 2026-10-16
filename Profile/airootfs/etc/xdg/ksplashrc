@@ -1,3 +1,3 @@
 [KSplash]
-Engine=KSplash
-Theme=arcade-splash
+Engine=KSplashQML
+Theme=com.github.ProjectArcade.Arcade
