@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Arcade Theme Setup
+Exec=/usr/local/bin/arcade-apply-theme
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=System;
+X-KDE-autostart-phase=1
+NoDisplay=true

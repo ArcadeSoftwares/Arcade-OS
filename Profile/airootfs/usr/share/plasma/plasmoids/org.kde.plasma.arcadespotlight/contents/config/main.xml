@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="AI">
+    <entry name="aiProvider" type="String">
+      <default>groq</default>
+    </entry>
+    <entry name="aiApiKey" type="String">
+      <default></default>
+    </entry>
+    <entry name="aiGroqModel" type="String">
+      <default>llama-3.3-70b-versatile</default>
+    </entry>
+    <entry name="aiOpenaiModel" type="String">
+      <default>gpt-4o-mini</default>
+    </entry>
+    <entry name="aiGeminiModel" type="String">
+      <default>gemini-2.0-flash</default>
+    </entry>
+    <entry name="aiOpenrouterModel" type="String">
+      <default>openai/gpt-4o-mini</default>
+    </entry>
+    <entry name="aiMemory" type="String">
+      <default></default>
+    </entry>
+  </group>
+</kcfg>

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+# Run only once per user session
+MARKER="$HOME/.config/.arcade_theme_applied"
+if [ -f "$MARKER" ]; then
+    exit 0
+fi
+
+# Apply Look-and-Feel Global Theme
+if command -v plasma-apply-lookandfeel >/dev/null 2>&1; then
+    plasma-apply-lookandfeel --apply com.github.ProjectArcade.Arcade >/dev/null 2>&1 || true
+fi
+
+# Apply Color Scheme
+if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
+    plasma-apply-colorscheme ArcadeDark >/dev/null 2>&1 || true
+fi
+
+# Apply Wallpaper
+WALLPAPER="/usr/share/wallpapers/Arcade/contents/images/3840x2160.png"
+if command -v plasma-apply-wallpaperimage >/dev/null 2>&1 && [ -f "$WALLPAPER" ]; then
+    plasma-apply-wallpaperimage "$WALLPAPER" >/dev/null 2>&1 || true
+fi
+
+touch "$MARKER"

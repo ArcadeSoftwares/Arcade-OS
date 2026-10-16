@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "ProjectArcade"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Microphone activity indicator with flickering orange dot",
+        "Icon": "audio-input-microphone",
+        "Id": "org.kde.plasma.arcademicindicator",
+        "License": "GPL-2.0+",
+        "Name": "Mic Indicator",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

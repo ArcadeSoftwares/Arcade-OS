@@ -1,2 +1,9 @@
+[General]
+ColorScheme=ArcadeDark
+
 [Icons]
 Theme=Arcade-icons
+
+[KDE]
+LookAndFeelPackage=com.github.ProjectArcade.Arcade
+widgetStyle=kvantum-dark

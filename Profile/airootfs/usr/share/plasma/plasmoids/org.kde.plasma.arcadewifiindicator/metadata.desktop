@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Wi-Fi Indicator
+
+Type=Service
+Icon=network-wireless
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-PluginInfo-Author=ProjectArcade
+X-KDE-PluginInfo-Name=org.kde.plasma.arcadewifiindicator
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Category=Network
+X-KDE-PluginInfo-Depends=

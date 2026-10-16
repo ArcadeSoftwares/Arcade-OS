@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clean solid black leaf icon -->
+  <path
+    d="M19.5 3.5C13.8 3.5 9 7.5 7.5 13C6.5 16.5 6.2 19 6 21C7.8 20.6 10.2 19.8 13.5 18.5C19 16.8 21.5 11.5 21.5 6.5C21.5 4.8 20.8 3.5 19.5 3.5Z"
+    fill="#000000"
+  />
+  <path
+    d="M7.8 19.8C9.5 16.5 12.2 13.5 16.5 11"
+    stroke="#FFFFFF"
+    stroke-width="1.8"
+    stroke-linecap="round"
+  />
+</svg>

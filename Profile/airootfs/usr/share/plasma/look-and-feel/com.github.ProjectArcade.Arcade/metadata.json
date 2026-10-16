@@ -1,0 +1,25 @@
+{
+   "KPackageStructure": "Plasma/LookAndFeel",
+   "KPlugin": {
+       "Authors": [
+           {
+               "Email": "thakurabhinav22@gmail.com",
+               "Name": "Abhinav"
+           }
+       ],
+       "Category": "Global Themes (Plasma 6)",
+       "ServiceTypes": [
+           "Plasma/LookAndFeel"
+       ],
+       "EnabledByDefault": true,
+       "Description": "Arcade Linux dark theme for KDE Plasma",
+       "Id": "com.github.ProjectArcade.Arcade",
+       "License": "GPLv3",
+       "Name": "Arcade",
+       "Website": "https://github.com/ProjectArcade"
+   },
+   "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Arcade;Linux;",
+   "X-KDE-fallbackPackage": "org.kde.breeze.desktop",
+   "X-Plasma-MainScript": "defaults",
+   "X-Plasma-APIVersion": "2"
+}

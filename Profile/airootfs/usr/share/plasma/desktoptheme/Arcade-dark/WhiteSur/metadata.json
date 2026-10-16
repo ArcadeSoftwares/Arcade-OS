@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "thakurabhinav22@hotmail.com",
+                "Name": "Vince Liuice"
+            }
+        ],
+        "Category": "Plasma 6.0 theme",
+        "Description": "Arcade by Vince Liuice",
+        "Description[zh_CN]": "Arcade 苹果主题，由 Vince Liuice (视觉设计师) 设计制作",
+        "EnabledByDefault": true,
+        "Id": "Arcade",
+        "License": "GPL-3.0",
+        "Name": "Arcade",
+        "Name[zh_CN]": "Arcade 苹果",
+        "Version": "6.2.0",
+        "Website": "https://github.com/thakurabhinav22"
+    },
+    "X-Plasma-API": "5.0"
+}

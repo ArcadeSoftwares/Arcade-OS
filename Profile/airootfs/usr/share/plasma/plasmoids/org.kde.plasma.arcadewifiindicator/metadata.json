@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "ProjectArcade"
+            }
+        ],
+        "Category": "Network",
+        "Description": "Modern Wi-Fi indicator with quick access to network panel",
+        "Icon": "network-wireless",
+        "Id": "org.kde.plasma.arcadewifiindicator",
+        "License": "GPL-2.0+",
+        "Name": "Wi-Fi Indicator",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

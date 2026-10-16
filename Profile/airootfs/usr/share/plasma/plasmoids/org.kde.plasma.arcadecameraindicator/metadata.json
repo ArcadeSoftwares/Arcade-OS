@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "ProjectArcade"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Camera activity indicator with flickering green dot",
+        "Icon": "camera-web",
+        "Id": "org.kde.plasma.arcadecameraindicator",
+        "License": "GPL-2.0+",
+        "Name": "Camera Indicator",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "ProjectArcade"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Unified privacy indicator for camera and microphone activity",
+        "Icon": "security-high",
+        "Id": "org.kde.plasma.arcadeprivacyindicator",
+        "License": "GPL-2.0+",
+        "Name": "Privacy Indicator",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

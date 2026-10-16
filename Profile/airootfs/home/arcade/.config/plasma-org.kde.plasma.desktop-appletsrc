@@ -1,0 +1,7 @@
+[Containments][1]
+activityId=
+wallpaperplugin=org.kde.image
+
+[Containments][1][Wallpaper][org.kde.image][General]
+Image=/usr/share/wallpapers/Arcade/contents/images/3840x2160.png
+PreviewImage=/usr/share/wallpapers/Arcade/contents/images/3840x2160.png

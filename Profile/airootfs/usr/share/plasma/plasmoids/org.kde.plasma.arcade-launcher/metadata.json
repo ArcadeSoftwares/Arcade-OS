@@ -1,0 +1,32 @@
+{
+	"KPackageStructure": "Plasma/Applet",
+	"KPlugin": {
+		"Authors": [
+			{
+				"Email": "abhinavthakurv22@gmail.com",
+				"Name": "Abhinav Thakur"
+			}
+		],
+		"Category": "Application Launchers",
+		"Description": "Arcade Launcher for Plasma",
+		"Description[cs]": "Moderní spouštěč pro Plasma!",
+		"Description[el]": "Μοντέρνος Εκκινητής plasma",
+		"Description[fi]": "Moderni käynnistin Plasman työpöydälle!",
+		"Description[it_IT]": "Un launcher moderno per plasma!",
+		"Description[pl]": "Nowoczesne menu programów dla Plasmy!",
+		"EnabledByDefault": true,
+		"Icon": "system-search",
+		"Id": "org.kde.plasma.arcade-launcher",
+		"Name": "Arcade Launcher",
+		"Name[cs]": "Spouštěč Andromeda",
+		"Name[el]": "Andromeda Launcher",
+		"Name[fi]": "Andromeda-käynnistin",
+		"Name[pl]": "Andromeda Launcher",
+		"Version": "1.0.1",
+		"Website": "https://github.com/ProjectArcade"
+	},
+	"X-Plasma-API-Minimum-Version": "6.0",
+	"X-Plasma-Provides": [
+		"org.kde.plasma.launchermenu"
+	]
+}
