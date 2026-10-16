@@ -10,6 +10,8 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+DIM='\033[2m'
 BOLD='\033[1m'
 NC='\033[0m' # No Color
 
@@ -19,6 +21,19 @@ LOCAL_REPO_DIR="${SCRIPT_DIR}/local-repo"
 CORE_REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)/ArcadeLinux-Core/calamares-core"
 WORK_DIR="${SCRIPT_DIR}/work"
 OUT_DIR="${SCRIPT_DIR}/out"
+
+show_banner() {
+    echo -e "${CYAN}${BOLD}"
+    cat << "EOF"
+    ___                        __           ____  _____
+   /   |  ______________ _____/ /__        / __ \/ ___/
+  / /| | / ___/ ___/ __ `/ __  / _ \______/ / / /\__ \ 
+ / ___ |/ /  / /__/ /_/ / /_/ /  __/_____/ /_/ /___/ / 
+/_/  |_/_/   \___/\__,_/\__,_/\___/      \____//____/  
+EOF
+    echo -e "${NC}${BOLD}      Arcade Linux Live/Install ISO Build System${NC}"
+    echo -e "${DIM}      https://github.com/ArcadeSoftwares/Arcade-OS${NC}\n"
+}
 
 info() {
     echo -e "${BLUE}[INFO]${NC} $1"
@@ -177,6 +192,8 @@ build_iso() {
 
 DO_CLEAN=false
 DO_SYNC=false
+
+show_banner
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
