@@ -25,8 +25,52 @@ WORK_DIR="${SCRIPT_DIR}/work"
 OUT_DIR="${SCRIPT_DIR}/out"
 
 show_banner() {
-    echo -e "${CYAN}${BOLD}"
-    cat << "EOF"
+    local logo_img="${PROFILE_DIR}/airootfs/usr/share/calamares/branding/arcade/arcade-logo.png"
+    if [[ ! -f "$logo_img" && -f "/home/abhi9av/Downloads/258029626.jpeg" ]]; then
+        logo_img="/home/abhi9av/Downloads/258029626.jpeg"
+    fi
+
+    if command -v chafa &>/dev/null && [[ -f "$logo_img" ]]; then
+        local img_cols=26
+        local img_rows=12
+        mapfile -t img < <(chafa "$logo_img" \
+            --size "${img_cols}x${img_rows}" \
+            --symbols sextant+half+block+quad \
+            --colors full \
+            --color-space din99d \
+            --dither none \
+            --work 9 \
+            --threshold 0.5 \
+            2>/dev/null)
+
+        local banner_lines=(
+            ""
+            "\033[1;38;2;255;45;85m󰣇 \033[1;38;2;255;45;85m𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 \033[1;38;2;199;125;255m@ \033[1;38;2;0;229;255m𝗟𝗜𝗡𝗨𝗫\033[0m"
+            "\033[38;2;255;45;85m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+            " \033[1;38;2;255;45;85m󰣇 System:\033[0m    \033[1;38;2;255;45;85mArcade Linux Live/Install ISO\033[0m"
+            " \033[1;38;2;199;125;255m󰌽 Project:\033[0m   \033[1;38;2;199;125;255mArcadeSoftwares/Arcade-OS\033[0m"
+            " \033[1;38;2;57;255;20m󱑂 Build:\033[0m     \033[1;38;2;57;255;20mAutomated mkarchiso Engine\033[0m"
+            "\033[38;2;0;229;255m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+            "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
+        )
+
+        local max_l=${#img[@]}
+        (( ${#banner_lines[@]} > max_l )) && max_l=${#banner_lines[@]}
+
+        echo ""
+        for (( i=0; i<max_l; i++ )); do
+            local il="${img[$i]:-}"
+            local bl="${banner_lines[$i]:-}"
+            if [[ -n "$il" ]]; then
+                printf '%s\e[0m   %b\n' "$il" "$bl"
+            else
+                printf '%*s   %b\n' "$img_cols" "" "$bl"
+            fi
+        done
+        echo ""
+    else
+        echo -e "${CYAN}${BOLD}"
+        cat << "EOF"
          ▄▄
         ████          Arcade-OS
        ██████         Arcade Linux Live/Install ISO Build System
@@ -36,7 +80,8 @@ show_banner() {
    ███        ███
   ▀▀            ▀▀
 EOF
-    echo -e "${NC}"
+        echo -e "${NC}"
+    fi
 }
 
 show_info() {
@@ -50,25 +95,63 @@ show_info() {
         core_status="Not Found"
     fi
 
-    echo ""
-    echo -e "         ${CYAN}▄▄${NC}           ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
-    echo -e "        ${CYAN}████${NC}          ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
-    echo -e "       \033[38;5;45m██████${NC}         ${WHITE}Arch Linux x86_64 • KDE Plasma 6${NC}"
-    echo -e "      \033[38;5;39m████████${NC}        ${GRAY}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
-    echo -e "     \033[38;5;33m████  ████${NC}       ${DIM}${SCRIPT_DIR}${NC}"
-    echo -e "    \033[38;5;33m████    ████${NC}      "
-    echo -e "   \033[38;5;27m███        ███${NC}     \033[31m██ \033[32m██ \033[33m██ \033[34m██ \033[35m██ \033[36m██ \033[37m██${NC}"
-    echo -e "  \033[38;5;27m▀▀            ▀▀${NC}    "
-    echo ""
-    echo -e "  ${BOLD}Profile Configuration:${NC}"
-    echo -e "    ${DIM}• Architecture:   ${NC}x86_64"
-    echo -e "    ${DIM}• Boot Modes:     ${NC}bios.syslinux, uefi.systemd-boot"
-    echo -e "    ${DIM}• Desktop:        ${NC}KDE Plasma 6 (macOS aesthetic, breeze/arcade)"
-    echo -e "    ${DIM}• Installer:      ${NC}Calamares GUI with Arcade QML branding"
-    echo -e "    ${DIM}• Packages:       ${NC}${pkg_count} base + desktop + utilities"
-    echo -e "    ${DIM}• Core Upstream:  ${NC}${core_status} (${CORE_REPO_DIR})"
-    echo -e "    ${DIM}• Local Repo:     ${NC}${LOCAL_REPO_DIR}"
-    echo ""
+    local logo_img="${PROFILE_DIR}/airootfs/usr/share/calamares/branding/arcade/arcade-logo.png"
+    if [[ ! -f "$logo_img" && -f "/home/abhi9av/Downloads/258029626.jpeg" ]]; then
+        logo_img="/home/abhi9av/Downloads/258029626.jpeg"
+    fi
+
+    if command -v chafa &>/dev/null && [[ -f "$logo_img" ]]; then
+        local img_cols=26
+        local img_rows=13
+        mapfile -t img < <(chafa "$logo_img" \
+            --size "${img_cols}x${img_rows}" \
+            --symbols sextant+half+block+quad \
+            --colors full \
+            --color-space din99d \
+            --dither none \
+            --work 9 \
+            --threshold 0.5 \
+            2>/dev/null)
+
+        local info_lines=(
+            "\033[1;38;2;255;45;85m󰣇 \033[1;38;2;255;45;85m𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 \033[1;38;2;199;125;255m@ \033[1;38;2;0;229;255m𝗟𝗜𝗡𝗨𝗫\033[0m"
+            "\033[38;2;255;45;85m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+            " \033[1;38;2;255;45;85m󰣇 OS:\033[0m        \033[1;38;2;255;45;85mArcade Linux x86_64\033[0m"
+            " \033[1;38;2;199;125;255m󰌽 Version:\033[0m   \033[1;38;2;199;125;255m${version} (Rolling)\033[0m"
+            " \033[1;38;2;57;255;20m󰧨 Desktop:\033[0m   \033[1;38;2;57;255;20mKDE Plasma 6 (macOS Aesthetic)\033[0m"
+            " \033[1;38;2;0;229;255m󰆍 Installer:\033[0m \033[1;38;2;0;229;255mCalamares 3.4.2 (Arcade-Core)\033[0m"
+            " \033[1;38;2;255;154;162m󰞷 Author:\033[0m    \033[1;38;2;255;154;162mAbhinav Thakur <thakurabhinav22>\033[0m"
+            " \033[1;38;2;0;229;255m󰋊 Profile:\033[0m   \033[0;37m${SCRIPT_DIR}\033[0m"
+            "\033[38;2;57;255;20m──────────────────────────────────────\033[0m"
+            " \033[1;38;2;255;45;85m󰘚 Packages:\033[0m  \033[1;38;2;255;45;85m${pkg_count} base + desktop + utils\033[0m"
+            " \033[1;38;2;57;255;20m󱑂 Core Repo:\033[0m \033[1;38;2;57;255;20m${core_status}\033[0m"
+            "\033[38;2;0;229;255m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+            "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
+        )
+
+        local max_l=${#img[@]}
+        (( ${#info_lines[@]} > max_l )) && max_l=${#info_lines[@]}
+
+        echo ""
+        for (( i=0; i<max_l; i++ )); do
+            local il="${img[$i]:-}"
+            local infl="${info_lines[$i]:-}"
+            if [[ -n "$il" ]]; then
+                printf '%s\e[0m   %b\n' "$il" "$infl"
+            else
+                printf '%*s   %b\n' "$img_cols" "" "$infl"
+            fi
+        done
+        echo ""
+    else
+        echo ""
+        echo -e "         ${CYAN}▄▄${NC}           ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
+        echo -e "        ${CYAN}████${NC}          ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
+        echo -e "       \033[38;5;45m██████${NC}         ${WHITE}Arch Linux x86_64 • KDE Plasma 6${NC}"
+        echo -e "      \033[38;5;39m████████${NC}        ${GRAY}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
+        echo -e "     \033[38;5;33m████  ████${NC}       ${DIM}${SCRIPT_DIR}${NC}"
+        echo ""
+    fi
 }
 
 info() {
