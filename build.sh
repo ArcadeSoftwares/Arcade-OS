@@ -27,14 +27,16 @@ OUT_DIR="${SCRIPT_DIR}/out"
 show_banner() {
     echo -e "${CYAN}${BOLD}"
     cat << "EOF"
-    ___                        __           ____  _____
-   /   |  ______________ _____/ /__        / __ \/ ___/
-  / /| | / ___/ ___/ __ `/ __  / _ \______/ / / /\__ \ 
- / ___ |/ /  / /__/ /_/ / /_/ /  __/_____/ /_/ /___/ / 
-/_/  |_/_/   \___/\__,_/\__,_/\___/      \____//____/  
+         ▄▄
+        ████          Arcade-OS
+       ██████         Arcade Linux Live/Install ISO Build System
+      ████████        https://github.com/ArcadeSoftwares/Arcade-OS
+     ████  ████
+    ████    ████
+   ███        ███
+  ▀▀            ▀▀
 EOF
-    echo -e "${NC}${BOLD}      Arcade Linux Live/Install ISO Build System${NC}"
-    echo -e "${DIM}      https://github.com/ArcadeSoftwares/Arcade-OS${NC}\n"
+    echo -e "${NC}"
 }
 
 show_info() {
@@ -49,11 +51,14 @@ show_info() {
     fi
 
     echo ""
-    echo -e "    ${CYAN}▄▀▀▄${NC}        ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
-    echo -e "   \033[38;5;45m▀▀▀▀▀▀${NC}       ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
-    echo -e "  \033[38;5;39m▀▀▀▀▀▀▀▀${NC}      ${WHITE}Arch Linux x86_64 • KDE Plasma${NC}"
-    echo -e " \033[38;5;33m▄▀▀    ▀▀▄${NC}     ${WHITE}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
-    echo -e "\033[38;5;27m▄▀▀      ▀▀▄${NC}    ${DIM}${SCRIPT_DIR}${NC}"
+    echo -e "         ${CYAN}▄▄${NC}           ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
+    echo -e "        ${CYAN}████${NC}          ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
+    echo -e "       \033[38;5;45m██████${NC}         ${WHITE}Arch Linux x86_64 • KDE Plasma 6${NC}"
+    echo -e "      \033[38;5;39m████████${NC}        ${GRAY}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
+    echo -e "     \033[38;5;33m████  ████${NC}       ${DIM}${SCRIPT_DIR}${NC}"
+    echo -e "    \033[38;5;33m████    ████${NC}      "
+    echo -e "   \033[38;5;27m███        ███${NC}     \033[31m██ \033[32m██ \033[33m██ \033[34m██ \033[35m██ \033[36m██ \033[37m██${NC}"
+    echo -e "  \033[38;5;27m▀▀            ▀▀${NC}    "
     echo ""
     echo -e "  ${BOLD}Profile Configuration:${NC}"
     echo -e "    ${DIM}• Architecture:   ${NC}x86_64"
@@ -205,6 +210,14 @@ build_iso() {
     echo -e "${BOLD}Work directory:   ${NC} ${WORK_DIR}"
     echo -e "${BOLD}Output directory: ${NC} ${OUT_DIR}"
     echo ""
+
+    # Ensure stale or incomplete previous build artifacts are cleaned so airootfs.sfs builds properly
+    if [[ -d "$WORK_DIR" ]]; then
+        if [[ ! -f "${WORK_DIR}/iso/arch/x86_64/airootfs.sfs" || "$DO_CLEAN" == true ]]; then
+            warn "Detected incomplete or dirty workspace. Auto-cleaning to ensure rootfs builds cleanly..."
+            clean_workspace
+        fi
+    fi
 
     mkdir -p "$OUT_DIR"
     sudo mkarchiso -v -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
