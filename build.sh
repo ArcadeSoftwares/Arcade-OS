@@ -61,7 +61,7 @@ show_banner() {
     echo -e "  ${GREEN}󱑂 Author:${NC}    ${GREEN}Abhinav Thakur <thakurabhinav22>${NC}"
     echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
-    echo -e "   ${PEACH}🥜 ${RED}𝗜 ${PURPLE}𝗟𝗜𝗞𝗘 ${CYAN}𝗟𝗜𝗡𝗨𝗫 ${GREEN}𝗟𝗜𝗞𝗘 ${PEACH}𝗔𝗥𝗖𝗔𝗗𝗘 ${PURPLE}𝗟𝗜𝗞𝗘 ${PEACH}𝗣𝗘𝗔𝗡𝗨𝗧 ${PEACH}🥜${NC}"
+    echo -e "   ${PEACH}🛡️ ${RED}𝗙𝗢𝗥𝗞𝗘𝗗 ${PURPLE}𝗙𝗢𝗥 ${CYAN}𝗣𝗥𝗜𝗩𝗔𝗖𝗬 ${GREEN}𝗕𝗨𝗜𝗟𝗧 ${PEACH}𝗙𝗢𝗥 ${PURPLE}𝗦𝗣𝗘𝗘𝗗 ${PEACH}🛡️${NC}"
     echo ""
 }
 
@@ -102,7 +102,7 @@ show_info() {
             "${PURPLE}󰋊 Core Repo:${NC} ${core_status}"
             "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
             "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
-            " ${PEACH}🥜 ${RED}𝗜 ${PURPLE}𝗟𝗜𝗞𝗘 ${CYAN}𝗟𝗜𝗡𝗨𝗫 ${GREEN}𝗟𝗜𝗞𝗘 ${PEACH}𝗔𝗥𝗖𝗔𝗗𝗘 ${PURPLE}𝗟𝗜𝗞𝗘 ${PEACH}𝗣𝗘𝗔𝗡𝗨𝗧 ${PEACH}🥜${NC}"
+            " ${PEACH}🛡️ ${RED}𝗙𝗢𝗥𝗞𝗘𝗗 ${PURPLE}𝗙𝗢𝗥 ${CYAN}𝗣𝗥𝗜𝗩𝗔𝗖𝗬 ${GREEN}𝗕𝗨𝗜𝗟𝗧 ${PEACH}𝗙𝗢𝗥 ${PURPLE}𝗦𝗣𝗘𝗘𝗗 ${PEACH}🛡️${NC}"
         )
 
         local max_l=${#img[@]}
