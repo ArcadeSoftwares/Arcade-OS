@@ -3,7 +3,7 @@ import QtQuick.Window
 
 Rectangle {
     id: root
-    color: "#0a0c10"
+    color: "#000000"
     property int stage
 
     property int hour: new Date().getHours()
@@ -109,24 +109,29 @@ Rectangle {
             property int smallSpacing: Math.max(2, gridUnit / 4)
         }
 
-        Image {
-            id: logo
-            width: units.gridUnit * 10
-            height: units.gridUnit * 10
-            source: "images/logo.svg"
-            sourceSize.width: units.gridUnit * 10
-            sourceSize.height: units.gridUnit * 10
-            fillMode: Image.PreserveAspectFit
+        Rectangle {
+            id: imageSource
+            width: 800
+            height: 600
+            color: "transparent"
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -units.gridUnit * 3
-            smooth: true
+            anchors.verticalCenterOffset: -units.gridUnit * 1.5
+            clip: true
+
+            AnimatedImage {
+                id: face
+                source: "images/arcade.gif"
+                anchors.centerIn: parent
+                width: 798
+                height: 598
+                smooth: true
+            }
         }
 
         Image {
             id: busyIndicator
+            y: parent.height - units.gridUnit * 9
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: logo.bottom
-            anchors.topMargin: units.gridUnit * 2
             source: "images/loading-00.svg"
             sourceSize.height: units.gridUnit * 2
             sourceSize.width: units.gridUnit * 2
@@ -134,7 +139,7 @@ Rectangle {
             RotationAnimator on rotation {
                 from: 0
                 to: 360
-                duration: 1200
+                duration: 1500
                 loops: Animation.Infinite
             }
         }
@@ -143,12 +148,12 @@ Rectangle {
             spacing: units.smallSpacing * 2
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: units.gridUnit * 3
+            anchors.bottomMargin: units.gridUnit * 2.5
 
             Text {
                 text: root.greeting
-                color: "#56b6c2"
-                font.pixelSize: units.gridUnit * 1.5
+                color: "#ffffff"
+                font.pixelSize: units.gridUnit * 1.4
                 font.bold: true
                 opacity: 0.95
                 horizontalAlignment: Text.AlignHCenter
@@ -157,12 +162,12 @@ Rectangle {
 
             Text {
                 text: root.selectedQuote
-                color: "#abb2bf"
+                color: "#aaaaaa"
                 font.pixelSize: units.gridUnit * 1.1
                 font.italic: true
                 opacity: 0.85
                 wrapMode: Text.Wrap
-                width: root.width * 0.85
+                width: root.width * 0.8
                 horizontalAlignment: Text.AlignHCenter
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -174,7 +179,7 @@ Rectangle {
         target: content
         from: 0
         to: 1
-        duration: 800
+        duration: 1000
         easing.type: Easing.InOutQuad
     }
 }
