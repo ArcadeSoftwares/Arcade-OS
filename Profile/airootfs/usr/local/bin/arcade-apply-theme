@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
-# Run only once per user session
+# Automatically adjust display resolution in VM / QEMU / VirtualBox
+for output in $(xrandr 2>/dev/null | grep " connected" | awk '{print $1}'); do
+    # Try setting modern HD/FHD resolution for VM windows
+    xrandr --output "$output" --mode 1920x1080 2>/dev/null || \
+    xrandr --output "$output" --mode 1600x900 2>/dev/null || \
+    xrandr --output "$output" --mode 1440x900 2>/dev/null || \
+    xrandr --output "$output" --mode 1366x768 2>/dev/null || \
+    xrandr --output "$output" --auto 2>/dev/null || true
+done
+
+# Run desktop theme configuration once per session
 MARKER="$HOME/.config/.arcade_theme_applied"
 if [ -f "$MARKER" ]; then
     exit 0

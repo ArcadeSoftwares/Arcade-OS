@@ -1,0 +1,113 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "type": "none"
+  },
+
+  "display": {
+    "separator": "  ",
+    "brightColor": true,
+    "percent": {
+      "type": 3
+    }
+  },
+
+  "modules": [
+    {
+      "type": "break"
+    },
+    {
+      "type": "title",
+      "format": "      \u001b[1;38;2;255;45;85m󰣇 \u001b[1;38;2;255;45;85m𝗔𝗕𝗛𝗜𝟵𝗔𝗩 \u001b[1;38;2;199;125;255m@ \u001b[1;38;2;0;229;255m𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 \u001b[1;38;2;0;229;255m󰌽\u001b[0m"
+    },
+    {
+      "type": "separator",
+      "string": "━",
+      "times": 36,
+      "outputColor": "38;2;255;45;85"
+    },
+    {
+      "type": "os",
+      "key": " 󰣇 OS",
+      "keyColor": "38;2;255;45;85",
+      "format": "\u001b[1;38;2;255;45;85m{name} {arch}\u001b[0m"
+    },
+    {
+      "type": "kernel",
+      "key": " 󰌽 Kernel",
+      "keyColor": "38;2;199;125;255",
+      "format": "\u001b[1;38;2;199;125;255m{release}\u001b[0m"
+    },
+    {
+      "type": "uptime",
+      "key": " 󱑂 Uptime",
+      "keyColor": "38;2;57;255;20",
+      "format": "\u001b[1;38;2;57;255;20m{1}d {2}h {3}m\u001b[0m"
+    },
+    {
+      "type": "shell",
+      "key": " 󰞷 Shell",
+      "keyColor": "38;2;0;229;255",
+      "format": "\u001b[1;38;2;0;229;255m{exe-name} {version}\u001b[0m"
+    },
+    {
+      "type": "de",
+      "key": " 󰧨 DE",
+      "keyColor": "38;2;0;229;255",
+      "format": "\u001b[1;38;2;0;229;255m{pretty-name} {version}\u001b[0m"
+    },
+    {
+      "type": "terminal",
+      "key": " 󰆍 Term",
+      "keyColor": "38;2;255;45;85",
+      "format": "\u001b[1;38;2;255;45;85m{pretty-name}\u001b[0m"
+    },
+    {
+      "type": "separator",
+      "string": "─",
+      "times": 36,
+      "outputColor": "38;2;57;255;20"
+    },
+    {
+      "type": "cpu",
+      "key": " 󰻠 CPU",
+      "keyColor": "38;2;0;229;255",
+      "format": "\u001b[1;38;2;0;229;255m{name}\u001b[0m"
+    },
+    {
+      "type": "memory",
+      "key": " 󰘚 RAM",
+      "keyColor": "38;2;255;45;85",
+      "format": "\u001b[1;38;2;255;45;85m{used} / {total}\u001b[0m"
+    },
+    {
+      "type": "disk",
+      "key": " 󰋊 Disk",
+      "keyColor": "38;2;0;229;255",
+      "folders": "/",
+      "format": "\u001b[1;38;2;0;229;255m{size-used} / {size-total}\u001b[0m"
+    },
+    {
+      "type": "separator",
+      "string": "─",
+      "times": 36,
+      "outputColor": "38;2;199;125;255"
+    },
+    {
+      "type": "separator",
+      "string": "━",
+      "times": 36,
+      "outputColor": "38;2;0;229;255"
+    },
+    {
+      "type": "colors",
+      "paddingLeft": 2,
+      "symbol": "circle"
+    },
+    {
+      "type": "custom",
+      "format": " \u001b[1;38;2;255;154;162m🛡️ \u001b[1;38;2;255;45;85m𝗙𝗢𝗥𝗞𝗘𝗗 \u001b[1;38;2;199;125;255m𝗙𝗢𝗥 \u001b[1;38;2;0;229;255m𝗣𝗥𝗜𝗩𝗔𝗖𝗬 \u001b[1;38;2;57;255;20m𝗕𝗨𝗜𝗟𝗧 \u001b[1;38;2;255;154;162m𝗙𝗢𝗥 \u001b[1;38;2;199;125;255m𝗦𝗣𝗘𝗘𝗗 \u001b[1;38;2;255;154;162m🛡️\u001b[0m"
+    }
+  ]
+}
