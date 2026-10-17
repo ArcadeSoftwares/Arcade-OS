@@ -177,6 +177,7 @@ usage() {
     echo "  --info       Display Arcade-OS branding, system information, and configuration"
     echo "  --clean      Clean previous build workspaces (work/ and out/)"
     echo "  --sync       Synchronize latest Calamares configs & assets from ArcadeLinux-Core"
+    echo "  --run        Run the built ISO in QEMU (or use ./run.sh directly)"
     echo "  --help       Show this help message"
     echo ""
     echo "Default action: Validates dependencies, updates pacman repo paths, and builds ISO."
@@ -340,6 +341,15 @@ while [[ $# -gt 0 ]]; do
         --sync)
             DO_SYNC=true
             shift
+            ;;
+        --run)
+            shift
+            if [[ -x "${SCRIPT_DIR}/run.sh" ]]; then
+                exec "${SCRIPT_DIR}/run.sh" "$@"
+            else
+                error "run.sh script not found!"
+                exit 1
+            fi
             ;;
         -h|--help)
             usage
