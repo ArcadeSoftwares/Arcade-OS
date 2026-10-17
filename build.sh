@@ -16,10 +16,12 @@ LOGO_IMG="${SCRIPT_DIR}/branding/arcade-logo.png"
 
 # Auto-detect ArcadeLinux-Core location
 CORE_REPO_DIR=""
-if [[ -d "/home/abhi9av/Desktop/ArcadeLinux-Core" ]]; then
+if [[ -d "/home/abhi9av/Desktop/ArcadeLinux-Core/calamares-core" ]]; then
+    CORE_REPO_DIR="/home/abhi9av/Desktop/ArcadeLinux-Core/calamares-core"
+elif [[ -d "/home/abhi9av/Desktop/ArcadeLinux-Core" ]]; then
     CORE_REPO_DIR="/home/abhi9av/Desktop/ArcadeLinux-Core"
-elif [[ -d "${SCRIPT_DIR}/../ArcadeLinux-Core" ]]; then
-    CORE_REPO_DIR="$(cd "${SCRIPT_DIR}/../ArcadeLinux-Core" && pwd)"
+elif [[ -d "${SCRIPT_DIR}/../ArcadeLinux-Core/calamares-core" ]]; then
+    CORE_REPO_DIR="$(cd "${SCRIPT_DIR}/../ArcadeLinux-Core/calamares-core" && pwd)"
 fi
 
 # ── Exact 24-bit TrueColor Palette from AnimeTerminal (config.jsonc) ──
