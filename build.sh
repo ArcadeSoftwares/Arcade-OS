@@ -2,6 +2,7 @@
 # ==============================================================================
 # Arcade-OS Universal Build & Runner Engine (build.sh)
 # Builds, tests, syncs, and boots Arcade Linux ISOs
+# Exact Cyberpunk / Neon Palette from thakurabhinav22/AnimeTerminal
 # ==============================================================================
 
 set -euo pipefail
@@ -21,26 +22,17 @@ elif [[ -d "${SCRIPT_DIR}/../ArcadeLinux-Core" ]]; then
     CORE_REPO_DIR="$(cd "${SCRIPT_DIR}/../ArcadeLinux-Core" && pwd)"
 fi
 
-# Vibrant ANSI Terminal Colors (16-color & 256-color palette)
-CYAN='\033[1;36m'
-BLUE='\033[1;34m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-RED='\033[1;31m'
-MAGENTA='\033[1;35m'
-WHITE='\033[1;37m'
-GRAY='\033[0;37m'
-DIM='\033[2m'
+# ── Exact 24-bit TrueColor Palette from AnimeTerminal (config.jsonc) ──
+RED='\033[1;38;2;255;45;85m'       # #FF2D55 - Neon Pink/Red (OS / Title / Alert)
+PURPLE='\033[1;38;2;199;125;255m'  # #C77DFF - Electric Purple (Kernel / Separators)
+CYAN='\033[1;38;2;0;229;255m'      # #00E5FF - Vivid Neon Cyan (Shell / DE / CPU / Disk)
+GREEN='\033[1;38;2;57;255;20m'     # #39FF14 - Electric Toxic Green (Uptime / Font / Success)
+PEACH='\033[1;38;2;255;154;162m'  # #FF9AA2 - Soft Neon Peach / Anya Peanut
+WHITE='\033[1;38;2;255;255;255m'  # Pure White
+GRAY='\033[38;2;140;140;150m'     # Muted Subtext Gray
 BOLD='\033[1m'
-NC='\033[0m'
-
-# Rich 256-color accents
-ACCENT_BLUE='\033[38;5;39m'
-ACCENT_CYAN='\033[38;5;51m'
-ACCENT_PURPLE='\033[38;5;141m'
-ACCENT_GREEN='\033[38;5;48m'
-ACCENT_ORANGE='\033[38;5;214m'
-COLOR_PALETTE="\033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
+DIM='\033[2m'
+NC='\033[0m'                      # Reset
 
 # Step counter
 CURRENT_STEP=0
@@ -50,9 +42,9 @@ step_header() {
     local step_title="$1"
     (( CURRENT_STEP++ )) || true
     echo ""
-    echo -e "${ACCENT_CYAN}  ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${NC}"
-    echo -e "${ACCENT_CYAN}  ┃${NC} ${ACCENT_BLUE}󰣇 [STEP ${CURRENT_STEP}/${TOTAL_STEPS}]${NC} ${WHITE}${BOLD}${step_title}${NC}"
-    echo -e "${ACCENT_CYAN}  ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${NC}"
+    echo -e "  ${RED}━${PURPLE}━${CYAN}━${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "  ${RED}󰣇 ${WHITE}${BOLD}[STEP ${CURRENT_STEP}/${TOTAL_STEPS}]${NC} ${CYAN}${BOLD}${step_title}${NC}"
+    echo -e "  ${RED}━${PURPLE}━${CYAN}━${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 }
 
@@ -61,11 +53,15 @@ show_banner() {
     if command -v chafa &>/dev/null && [[ -f "$LOGO_IMG" ]]; then
         chafa --size 22x10 --symbols sextant+half+block+quad --colors full --color-space din99d --dither none --work 9 "$LOGO_IMG" 2>/dev/null || true
     fi
-    echo -e "  ${CYAN}▄▄${NC}           ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}Build & Runner Engine${NC}"
-    echo -e "  ${CYAN}████${NC}          ${ACCENT_BLUE}Arch Linux x86_64${NC} • ${WHITE}KDE Plasma 6 (macOS Aesthetic)${NC}"
-    echo -e " ${ACCENT_BLUE}██████${NC}         ${GREEN}Calamares 3.4.2 GUI${NC} • ${ACCENT_PURPLE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
-    echo -e "${ACCENT_CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "  ${COLOR_PALETTE}"
+    echo -e "  ${RED}󰣇 ${RED}𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 ${PURPLE}@ ${CYAN}𝗟𝗜𝗡𝗨𝗫 ${CYAN}󰌽${NC}"
+    echo -e "  ${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "  ${RED}󰣇 OS:${NC}        ${RED}Arcade Linux x86_64${NC}"
+    echo -e "  ${PURPLE}󰌽 Kernel:${NC}    ${PURPLE}Rolling Release • KDE Plasma 6${NC}"
+    echo -e "  ${CYAN}󰞷 System:${NC}    ${CYAN}Calamares 3.4.2 GUI • macOS Aesthetic${NC}"
+    echo -e "  ${GREEN}󱑂 Author:${NC}    ${GREEN}Abhinav Thakur <thakurabhinav22>${NC}"
+    echo -e "  ${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
+    echo -e "   ${PEACH}🥜 ${RED}𝗜 ${PURPLE}𝗟𝗜𝗞𝗘 ${CYAN}𝗟𝗜𝗡𝗨𝗫 ${GREEN}𝗟𝗜𝗞𝗘 ${PEACH}𝗔𝗥𝗖𝗔𝗗𝗘 ${PURPLE}𝗟𝗜𝗞𝗘 ${PEACH}𝗣𝗘𝗔𝗡𝗨𝗧 ${PEACH}🥜${NC}"
     echo ""
 }
 
@@ -87,22 +83,26 @@ show_info() {
             --color-space din99d \
             --dither none \
             --work 9 \
+            --threshold 0.5 \
             "$LOGO_IMG" 2>/dev/null)
 
         local -a info_lines=(
-            "${ACCENT_CYAN}󰣇 𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 @ 𝗟𝗜𝗡𝗨𝗫${NC}"
-            "${ACCENT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            "${WHITE}󰣇 OS:${NC}        ${CYAN}Arcade Linux x86_64${NC}"
-            "${WHITE}󰌽 Version:${NC}   ${YELLOW}${version} (Rolling)${NC}"
-            "${WHITE}󰧨 Desktop:${NC}   ${BLUE}KDE Plasma 6 (macOS Aesthetic)${NC}"
-            "${WHITE}󰆍 Installer:${NC} ${GREEN}Calamares 3.4.2 (Arcade-Core)${NC}"
-            "${WHITE}󰞷 Author:${NC}    ${MAGENTA}Abhinav Thakur <thakurabhinav22>${NC}"
-            "${WHITE}󰋊 Profile:${NC}   ${DIM}${SCRIPT_DIR}${NC}"
-            "${GRAY}──────────────────────────────────────${NC}"
-            "${WHITE}󰘚 Packages:${NC}  ${YELLOW}${pkg_count}${NC} ${GRAY}base + desktop + utils${NC}"
-            "${WHITE}󱑂 Core Repo:${NC} ${core_status}"
-            "${ACCENT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            "   ${COLOR_PALETTE}"
+            "${RED}󰣇 𝗔𝗕𝗛𝗜𝟵𝗔𝗩 ${PURPLE}@ ${CYAN}𝗔𝗥𝗖𝗔𝗗𝗘-𝗢𝗦 ${CYAN}󰌽${NC}"
+            "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+            "${RED}󰣇 OS:${NC}        ${RED}Arcade Linux x86_64${NC}"
+            "${PURPLE}󰌽 Kernel:${NC}    ${PURPLE}6.x (Rolling)${NC}"
+            "${GREEN}󱑂 Status:${NC}    ${GREEN}Production Ready${NC}"
+            "${CYAN}󰞷 Shell:${NC}     ${CYAN}zsh / bash${NC}"
+            "${CYAN}󰧨 DE:${NC}        ${CYAN}KDE Plasma 6 (macOS Aesthetic)${NC}"
+            "${RED}󰆍 Installer:${NC} ${RED}Calamares 3.4.2${NC}"
+            "${GREEN}󰛖 Author:${NC}    ${GREEN}Abhinav Thakur <thakurabhinav22>${NC}"
+            "${GREEN}──────────────────────────────────────${NC}"
+            "${CYAN}󰻠 Packages:${NC}  ${CYAN}${pkg_count} packages active${NC}"
+            "${RED}󰘚 Profile:${NC}   ${RED}${SCRIPT_DIR}${NC}"
+            "${PURPLE}󰋊 Core Repo:${NC} ${core_status}"
+            "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+            "   \033[31m \033[32m \033[33m \033[34m \033[35m \033[36m \033[37m\033[0m"
+            " ${PEACH}🥜 ${RED}𝗜 ${PURPLE}𝗟𝗜𝗞𝗘 ${CYAN}𝗟𝗜𝗡𝗨𝗫 ${GREEN}𝗟𝗜𝗞𝗘 ${PEACH}𝗔𝗥𝗖𝗔𝗗𝗘 ${PURPLE}𝗟𝗜𝗞𝗘 ${PEACH}𝗣𝗘𝗔𝗡𝗨𝗧 ${PEACH}🥜${NC}"
         )
 
         local max_l=${#img[@]}
@@ -120,30 +120,12 @@ show_info() {
         done
         echo ""
     else
-        echo ""
-        echo -e "         ${CYAN}▄▄${NC}           ${WHITE}${BOLD}Arcade-OS${NC} ${CYAN}(v${version})${NC}"
-        echo -e "        ${CYAN}████${NC}          ${WHITE}Abhinav Thakur${NC} ${DIM}<thakurabhinav22>${NC}"
-        echo -e "       \033[38;5;45m██████${NC}         ${WHITE}Arch Linux x86_64 • KDE Plasma 6${NC}"
-        echo -e "      \033[38;5;39m████████${NC}        ${GRAY}Calamares 3.4.2 • ${pkg_count} Packages${NC}"
-        echo -e "     \033[38;5;33m████  ████${NC}       ${DIM}${SCRIPT_DIR}${NC}"
-        echo -e "    \033[38;5;33m████    ████${NC}      "
-        echo -e "   \033[38;5;27m███        ███${NC}     ${COLOR_PALETTE}"
-        echo -e "  \033[38;5;27m▀▀            ▀▀${NC}    "
-        echo ""
-        echo -e "  ${BOLD}Profile Configuration:${NC}"
-        echo -e "    ${DIM}• Architecture:   ${NC}${CYAN}x86_64${NC}"
-        echo -e "    ${DIM}• Boot Modes:     ${NC}${YELLOW}bios.syslinux, uefi.systemd-boot${NC}"
-        echo -e "    ${DIM}• Desktop:        ${NC}${BLUE}KDE Plasma 6 (WhiteSur / Arcade Dark Theme)${NC}"
-        echo -e "    ${DIM}• Installer:      ${NC}${GREEN}Calamares GUI with Arcade QML branding${NC}"
-        echo -e "    ${DIM}• Packages:       ${NC}${YELLOW}${pkg_count}${NC} packages"
-        echo -e "    ${DIM}• Core Upstream:  ${NC}${core_status} (${CORE_REPO_DIR})"
-        echo -e "    ${DIM}• Local Repo:     ${NC}${LOCAL_REPO_DIR}"
-        echo ""
+        show_banner
     fi
 }
 
 info() {
-    echo -e "  ${BLUE}󰋼 [INFO]${NC} $1"
+    echo -e "  ${CYAN}󰋼 [INFO]${NC} $1"
 }
 
 success() {
@@ -151,7 +133,7 @@ success() {
 }
 
 warn() {
-    echo -e "  ${YELLOW}▲ [WARNING]${NC} $1"
+    echo -e "  ${PURPLE}▲ [WARNING]${NC} $1"
 }
 
 error() {
@@ -159,23 +141,23 @@ error() {
 }
 
 usage() {
-    echo -e "${BOLD}${CYAN}Usage:${NC} $0 [options]"
+    echo -e "${RED}${BOLD}Usage:${NC} $0 [options]"
     echo ""
-    echo -e "${BOLD}${WHITE}Build Options:${NC}"
-    echo -e "  ${CYAN}--clean${NC}               Clean previous build workspaces (${DIM}work/${NC} and ${DIM}out/${NC})"
+    echo -e "${WHITE}${BOLD}Build Options:${NC}"
+    echo -e "  ${CYAN}--clean${NC}               Clean previous build workspaces (${GRAY}work/${NC} and ${GRAY}out/${NC})"
     echo -e "  ${CYAN}--sync${NC}                Synchronize latest Calamares & Plasma configs from ArcadeLinux-Core"
-    echo -e "  ${CYAN}--info${NC}                Display Arcade-OS branding, system information, and specs"
+    echo -e "  ${CYAN}--info${NC}                Display Arcade-OS AnimeTerminal branding and specs"
     echo -e "  ${CYAN}--help, -h${NC}            Show this help message"
     echo ""
-    echo -e "${BOLD}${WHITE}Runner Options (QEMU VM):${NC}"
+    echo -e "${WHITE}${BOLD}Runner Options (QEMU VM):${NC}"
     echo -e "  ${GREEN}--run [iso]${NC}           Launch built ISO in virtual machine"
-    echo -e "    ${DIM}-m, --memory <RAM>${NC}  RAM size (default: ${YELLOW}4G${NC})"
-    echo -e "    ${DIM}-c, --cpu <CORES>${NC}   CPU cores (default: ${YELLOW}4${NC})"
-    echo -e "    ${DIM}--uefi${NC}              Force UEFI (OVMF) boot mode"
-    echo -e "    ${DIM}--bios${NC}              Force Legacy BIOS boot mode (${GREEN}default${NC})"
-    echo -e "    ${DIM}--archiso${NC}           Run via archiso wrapper (${DIM}run_archiso${NC})"
+    echo -e "    ${GRAY}-m, --memory <RAM>${NC}  RAM size (default: ${GREEN}4G${NC})"
+    echo -e "    ${GRAY}-c, --cpu <CORES>${NC}   CPU cores (default: ${GREEN}4${NC})"
+    echo -e "    ${GRAY}--uefi${NC}              Force UEFI (OVMF) boot mode"
+    echo -e "    ${GRAY}--bios${NC}              Force Legacy BIOS boot mode (${GREEN}default${NC})"
+    echo -e "    ${GRAY}--archiso${NC}           Run via archiso wrapper (${GRAY}run_archiso${NC})"
     echo ""
-    echo -e "${DIM}Default action (without flags): Validates dependencies, syncs repositories, and builds the ISO.${NC}"
+    echo -e "${GRAY}Default action (without flags): Validates dependencies, syncs repositories, and builds the ISO.${NC}"
 }
 
 check_dependencies() {
@@ -197,7 +179,7 @@ check_dependencies() {
 
 clean_workspace() {
     step_header "Cleaning Previous Build Workspaces"
-    info "Purging ${DIM}work/${NC} and ${DIM}out/${NC} directories..."
+    info "Purging ${GRAY}work/${NC} and ${GRAY}out/${NC} directories..."
     if [[ -d "$WORK_DIR" || -d "$OUT_DIR" || -d "${PROFILE_DIR}/work" || -d "${PROFILE_DIR}/out" ]]; then
         sudo rm -rf "$WORK_DIR" "$OUT_DIR" "${PROFILE_DIR}/work" "${PROFILE_DIR}/out"
         success "Cleaned previous workspaces."
@@ -268,14 +250,14 @@ with open(conf_path, 'w') as f:
     f.write(new_content)
 "
     python3 -c "$python_script"
-    success "Configured ${CYAN}[arcade-local]${NC} with absolute path resolvers."
+    success "Configured ${CYAN}[arcade-local]${NC} with dynamic path resolvers."
 }
 
 build_iso() {
     step_header "Compiling Arcade Linux Bootable ISO"
-    echo -e "  ${BOLD}Profile directory:${NC} ${CYAN}${PROFILE_DIR}${NC}"
-    echo -e "  ${BOLD}Work directory:   ${NC} ${YELLOW}${WORK_DIR}${NC}"
-    echo -e "  ${BOLD}Output directory: ${NC} ${GREEN}${OUT_DIR}${NC}"
+    echo -e "  ${WHITE}${BOLD}Profile directory:${NC} ${CYAN}${PROFILE_DIR}${NC}"
+    echo -e "  ${WHITE}${BOLD}Work directory:   ${NC} ${PURPLE}${WORK_DIR}${NC}"
+    echo -e "  ${WHITE}${BOLD}Output directory: ${NC} ${GREEN}${OUT_DIR}${NC}"
     echo ""
 
     if [[ -d "$WORK_DIR" ]]; then
@@ -299,9 +281,9 @@ build_iso() {
 
 run_vm() {
     show_banner
-    echo -e "  ${ACCENT_CYAN}┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓${NC}"
-    echo -e "  ${ACCENT_CYAN}┃${NC} ${ACCENT_BLUE}󰣇 [QEMU RUNNER]${NC} ${WHITE}${BOLD}Arcade Linux Virtual Machine${NC}"
-    echo -e "  ${ACCENT_CYAN}┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛${NC}"
+    echo -e "  ${RED}━${PURPLE}━${CYAN}━${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "  ${RED}󰣇 ${WHITE}${BOLD}[QEMU RUNNER]${NC} ${CYAN}${BOLD}Arcade Linux Virtual Machine${NC}"
+    echo -e "  ${RED}━${PURPLE}━${CYAN}━${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 
     local memory="4G"
@@ -355,8 +337,8 @@ run_vm() {
     fi
 
     info "ISO Image:    ${CYAN}$(basename "$target_iso")${NC}"
-    info "Memory (RAM): ${YELLOW}${memory}${NC}"
-    info "CPU Cores:    ${YELLOW}${cores}${NC}"
+    info "Memory (RAM): ${GREEN}${memory}${NC}"
+    info "CPU Cores:    ${PURPLE}${cores}${NC}"
 
     if [[ "$runner" == "archiso" ]]; then
         if command -v run_archiso &>/dev/null; then
@@ -396,7 +378,7 @@ run_vm() {
             warn "OVMF UEFI firmware not found on host. Defaulting to BIOS."
         fi
     else
-        info "Boot Mode: ${YELLOW}BIOS (Legacy)${NC}"
+        info "Boot Mode: ${PURPLE}BIOS (Legacy)${NC}"
     fi
 
     echo ""
